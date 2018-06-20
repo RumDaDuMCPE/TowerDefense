@@ -8,12 +8,12 @@
 
 namespace TowerDefense\Tasks;
 
-use pocketmine\scheduler\PluginTask;
+use pocketmine\scheduler\Task;
 use pocketmine\Player;
 
 use TowerDefense\Loader;
 
-class Extraction extends PluginTask {
+class Extraction extends Task {
 
     public $seconds = 0;
 
