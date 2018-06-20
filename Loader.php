@@ -7,10 +7,8 @@ use pocketmine\plugin\PluginBase;
 use pocketmine\event\Listener;
 
 use TowerDefense\Events\{
-    PlayerMovement,
-    PlayerDamage,
-    PlayerInteraction,
-    PlayerDeath
+    PlayerEvents,
+    EntityEvents
 }
 
 class Loader extends PluginBase implements Listener {
@@ -32,10 +30,8 @@ class Loader extends PluginBase implements Listener {
 
   public function registerEvents() {
       foreach ([
-          new PlayerMovement(),
-          new PlayerInteraction(),
-          new PlayerDamage(),
-          new PlayerDeath()
+          new PlayerEvents(),
+          new EntityEvents(),
                ] as $event) {
           $this->getServer()->getPluginManager()->registerEvents($event);
       }
@@ -103,6 +99,6 @@ class Loader extends PluginBase implements Listener {
 
   public function unscheduleTask($id) {
       unset ($this->Tasks[$id]);
-      Server::getInstance()->getScheduler()->cancelTask($id);
+      $this->getScheduler()->cancelTask($id);
   }
 }
