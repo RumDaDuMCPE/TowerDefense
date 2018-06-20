@@ -36,7 +36,8 @@ class PlayerEvents implements Listener {
       $player->setGamemode(3);
       $player->getInventory()->clearAll();
       $player->getArmorInventory()->clearAll();
-      //$player->getInventory()->setItem(5, $item); $item needs to be defined
+      $item = Item::get(Item::BED);
+      $player->getInventory()->setItem(5, $item); // Adds back to lobby option.
     }
   }
 }
