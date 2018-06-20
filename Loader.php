@@ -1,10 +1,4 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: Sahal
- * Date: 19/06/2018
- * Time: 17:41
- */
 
 namespace TowerDefense;
 
