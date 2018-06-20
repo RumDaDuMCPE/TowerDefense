@@ -1,9 +1,6 @@
 <?php
 /**
- * Created by PhpStorm.
- * User: Sahal
- * Date: 19/06/2018
- * Time: 18:33
+ * Warns player if an opponent enters the tower.
  */
 
 namespace TowerDefense\Tasks;
@@ -15,7 +12,6 @@ use pocketmine\utils\TextFormat as c;
 use TowerDefense\Loader;
 
 class Warning extends Task {
-    
     public function __construct(Loader $loader, Player $player){
         parent::__construct($loader);
         $this->loader = $loader;
@@ -23,7 +19,7 @@ class Warning extends Task {
     }
 
     public function onRun($tick) {
-        $msg = $this->loader->getMessage("breach", $this->player);
+        $msg = $this->loader->getMessage("breach", $this->player); // fetch the error message.
         $opponents = $this->loader->getOpponents($this->player->getName());
         $opponents->sendPopup($msg);
     }
