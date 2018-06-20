@@ -1,6 +1,6 @@
 <?php
 
-namespace TowerDefense\api;
+namespace TowerDefense\api\game;
 
 use pocketmine\utils\TextFormat;
 use pocketmine\Player;
