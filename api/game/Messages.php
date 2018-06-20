@@ -6,7 +6,7 @@ use pocketmine\utils\TextFormat;
 use pocketmine\Player;
 
 class messages {
-    public function getMessages(string $msg, Player $player) : string {
+    public function getMessage(string $msg, Player $player) : string {
         $messages = [
             "breach" => "&cYour tower is being breached by &6".$player->getName()."&r&c!",
             "error" => "&4ERROR FETCHING MESSAGE!"
