@@ -9,12 +9,13 @@
 namespace TowerDefense\Tasks;
 
 use pocketmine\Player;
-use pocketmine\scheduler\PluginTask;
+use pocketmine\scheduler\Task;
 use pocketmine\utils\TextFormat as c;
 
 use TowerDefense\Loader;
 
-class Warning extends PluginTask {
+class Warning extends Task {
+    
     public function __construct(Loader $loader, Player $player){
         parent::__construct($loader);
         $this->loader = $loader;
