@@ -19,7 +19,7 @@ class Warning extends Task {
     }
 
     public function onRun($tick) {
-        $msg = $this->loader->getMessage("breach", $this->player); // fetch the error message.
+        $msg = $this->loader->getMessages("breach", $this->player); // fetch the error message.
         $opponents = $this->loader->getOpponents($this->player->getName());
         $opponents->sendPopup($msg);
     }
