@@ -2,6 +2,9 @@
 
 namespace TowerDefense\api\game;
 
+use TowerDefense\api\game\Game;
+use TowerDefense\api\game\managers\TeamManager;
+
 class GameManager {
 
   private static $instance;
