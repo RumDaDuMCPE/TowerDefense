@@ -25,7 +25,7 @@ class Extraction extends Task {
 
     public function onRun($tick) {
         if ($seconds = 10) {
-            $msg = $this->loader->getMessages("Extraction.successful", $this->player);
+            $msg = $this->loader->getMessages(strtolower."Extraction.successful", $this->player);
             $this->player->sendMessage($msg);
             $block = $this->loader->getEnemyBlock($this->player->getName());
             $this->loader->unsetBlock($block)
