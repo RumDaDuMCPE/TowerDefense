@@ -36,27 +36,27 @@ class Loader extends PluginBase implements Listener {
         }
     }
 
-    
+
     public function findPlayerGame(string $player) : string {
         // TODO
     }
-    
+
 
 
     public function sendPlayerToGame(string $player, int $coords) {
         // TODO
-  }
+    }
 
-    public function isInAnyGame(string $player) {
+    public function isInAnyGame(string $player) : bool {
         // TODO
     }
 
 
-    public function isInGame(string $player) {
+    public function isInGame(string $player) : bool {
         if (isInAnyGame($player)) return true;
     }
 
-    public function getOpponents(string $player) {
+    public function getOpponents(string $player) : array {
         // TODO
     }
 
@@ -69,7 +69,7 @@ class Loader extends PluginBase implements Listener {
 
     }
 
-    public function isInTower(Player $player) {
+    public function isInTower(Player $player) : bool {
         if ($this->getAreas()->isInTower($player)) return true;
     }
 
