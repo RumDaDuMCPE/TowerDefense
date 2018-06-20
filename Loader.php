@@ -13,6 +13,8 @@ use TowerDefense\Events\{
 
 class Loader extends PluginBase implements Listener {
 
+    private static $instance;
+    
     public $tasks = [];
 
     public $game1 = [];
@@ -24,10 +26,15 @@ class Loader extends PluginBase implements Listener {
     public $Team_B = [];
 
   public function onEnable() {
+       self::$instance = $this;
       $this->registerEvents();
 
   }
-
+  
+  public static function get() {
+    return self::$instance;
+  }
+    
   public function registerEvents() {
       foreach ([
           new PlayerEvents(),
