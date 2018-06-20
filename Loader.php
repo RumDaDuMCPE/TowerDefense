@@ -17,14 +17,6 @@ class Loader extends PluginBase implements Listener {
 
     public $tasks = [];
 
-    public $game1 = [];
-    public $game2 = [];
-    public $game3 = [];
-    public $game4 = [];
-
-    public $Team_A = [];
-    public $Team_B = [];
-
     public function onEnable() {
         self::$instance = $this;
         $this->registerEvents();
@@ -44,51 +36,28 @@ class Loader extends PluginBase implements Listener {
         }
     }
 
+    
     public function findPlayerGame(string $player) : string {
-        if (in_array($player, $this->game1)) {
-            return "game1";
-        }
-
-        if (in_array($player, $this->game2)) {
-            return "game2";
-        }
-
-        if (in_array($player, $this->game3)) {
-            return "game3";
-        }
-
-        if (in_array($player, $this->game4)) {
-            return "game4";
-        }
-
+        // TODO
     }
+    
+
 
     public function sendPlayerToGame(string $player, int $coords) {
-        if ($coords = /* game1 sign coords */ && count($this->game1) =< 16) {
-            $this->game1[] = $player;
-            $this->teleportPlayerToArena($player);
-
-        }
-
+        // TODO
   }
 
     public function isInAnyGame(string $player) {
-        if (in_array($player, $this->game1) || in_array($player, $this->game2) || in_array($player, $this->game3) || in_array($player, $this->game4))
-            return true;
+        // TODO
     }
+
 
     public function isInGame(string $player) {
         if (isInAnyGame($player)) return true;
     }
 
     public function getOpponents(string $player) {
-        if (in_array($player, $this->Team_A) && $this->isInTeamB($player)) {
-            return true;
-        } elseif (in_array($player, $this->Team_B) && $this->isInTeamA($player)) {
-            return true;
-        } else {
-            return false;
-        }
+        // TODO
     }
 
     public function getAreas() {
@@ -108,7 +77,7 @@ class Loader extends PluginBase implements Listener {
         unset ($this->Tasks[$id]);
         $this->getScheduler()->cancelTask($id);
     }
-    
+
     public function getMessages(string $msg, Player $player) : string {
         $messages = new api\game\Messages();
         $message = $messages->getMessage($msg, $player);
