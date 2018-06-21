@@ -24,6 +24,10 @@ class RBCPlayer {
     return $this->in_game;
   }
   
+  public function getGameId() {
+    return $this->gameId;
+  }
+  
   public function setPlaying(bool $playing, int $gameId) {
     $this->in_game = $playing;
     $thiss->gameId = $gameId;
