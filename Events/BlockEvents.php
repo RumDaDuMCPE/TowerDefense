@@ -33,7 +33,7 @@ class BlockEvents implements Listener {
         //TODO: Check if there is a valid map
         $event->setLines(["[TowerDefense]", "TestMap", "2", ""]);
         GameManager::get()->createGame("TestMap", 2);
-        $player->sendMessage(Loader::PREFIX . "A join sign has been created for TestMap!"); //Change the hardcode once maps have been implemented!
+        $player->sendMessage(c::AQUA . "A join sign has been created for TestMap!"); //Change the hardcode once maps have been implemented!
       } else {
         $event->setLines([c::RED . "[TowerDefense]", "You must put a map name!", "", ""]);
       }
