@@ -27,6 +27,12 @@ class DeathTask extends Task {
       $item = Item::get(Item::BED, 0 ,1)->setCustomName(c::RESET . c::BOLD. c::GOLD . "Return to lobby!");
       $this->player->getInventory()->setItem(4, $item);
       $this->corpse->close();
-    } else $this->time--;
+    } else {
+      if(!$this->player->getLevel()->getEntity($this->corpse->getId())) {
+        Loader::get()->getScheduler()->cancelTask($this->getTaskId());
+      } else {
+        $this->time--;
+      }
+    }
   }
 }
