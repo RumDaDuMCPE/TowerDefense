@@ -2,6 +2,7 @@
 
 namespace TowerDefense\api;
 
+use TowerDefense\Loader;
 use TowerDefense\api\game\GameManager;
 use TowerDefense\api\player\PlayerManager;
 
