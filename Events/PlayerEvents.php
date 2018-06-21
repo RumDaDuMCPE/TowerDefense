@@ -24,7 +24,8 @@ class PlayerEvents implements Listener {
         if($tile->getLine(0) === "[TowerDefense]") {
           //TODO: Check if the map is valid
           $event->setCancelled(true);
-          GameManager:;get()->addPlayerToGame($player);
+          $game = GameManager::get()->getGame(GameManager::get()->getIdByMap($tile->getLine(1)))
+          GameManager:;get()->addPlayerToGame($player, $tile->getLine(1));
         }
       }
     }
