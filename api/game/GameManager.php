@@ -53,7 +53,7 @@ class GameManager {
     if($game->getPlayerCount() === $game->getMaxPlayers()) {
       $this->prepare($gameId);
       unset($this->open[$gameId]);
-      $this->createGame($game->getMap());
+      $this->createGame($game->getMap(), $game->getMaxPlayers());
     }
   }
   
