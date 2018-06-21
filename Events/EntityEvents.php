@@ -54,6 +54,7 @@ class EntityEvents implements Listener {
                   }
                   $entity->setImmobile(false);
                   $entity->spawnToAll();
+                  //TODO: Teleport players back to their tower
                 }
               }
             }
