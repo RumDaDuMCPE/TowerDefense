@@ -54,7 +54,7 @@ class Loader extends PluginBase implements Listener {
 
     }
 
-    public function isInTower(Player $player) : bool {
+    public function isInTower(Player $player) : bool { // Checks if player is in in ANY Tone of the towers.
         if ($this->getAreas()->isInTower($player)) return true;
     }
 
