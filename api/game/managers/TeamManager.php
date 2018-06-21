@@ -22,6 +22,16 @@ class TeamManager {
     return $this->teams[$team] ? $this->teams[$team] : null;
   }
   
+  public function getTeamByPlayer(Player $player) {
+    foreach($this->teams as $team) {
+      foreach($team->getMembers() as $member) {
+        if($member === $player) {
+          return $team;
+        }
+      }
+    }
+  }
+  
   public function getTeams() {
     return $this->teams;
   }
