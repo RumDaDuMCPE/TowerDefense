@@ -8,6 +8,7 @@ class RBCPlayer {
 
   private $name;
   private $in_game = false;
+  private $gameId;
   private $wins;
   
   public function __construct(string $name, int $wins) {
@@ -23,8 +24,9 @@ class RBCPlayer {
     return $this->in_game;
   }
   
-  public function setPlaying(bool $playing) {
+  public function setPlaying(bool $playing, int $gameId) {
     $this->in_game = $playing;
+    $thiss->gameId = $gameId;
   }
   
   public function getWins() {
