@@ -2,6 +2,9 @@
 
 namespace TowerDefense\api;
 
+use TowerDefense\api\game\GameManager;
+use TowerDefense\api\player\PlayerManager;
+
 class Utils {
 
   public const CHAT = 0;
@@ -24,5 +27,19 @@ class Utils {
         throw new \InvalidStateException("Invalid data entered!");
       }
     }
+  }
+  
+  private static function loadClasses() {
+    new GameManager();
+    new PlayerManager();
+  }
+  
+  public static function enable() {
+    self::loadClasses();
+    PlayerManager::get()->loadData();
+  }
+  
+  public static function disable() {
+    PlayerManager::get()->saveData();
   }
 }
