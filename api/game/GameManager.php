@@ -10,6 +10,7 @@ class GameManager {
   private static $instance;
   
   private $games = [];
+  private $open = [];
   
   public function __construct() {
     self::$instance = $this;
@@ -19,8 +20,12 @@ class GameManager {
     return self::$instance;
   }
   
-  public function getGame(int $id) {
+  public function getGame(string $id) {
     return isset($this->games[$id]) ? $this->games[$id] : null;
+  }
+  
+  public function getIdByMap(string $map) {
+    return $this->open[$map];
   }
   
   public function getGames() {
@@ -28,12 +33,32 @@ class GameManager {
   }
   
   //This needs too be rewritten in the future too allow better game management
-  public function createGame(): Game {
+  public function createGame(string $map, int $maxplayers): Game {
     $id = rand();
+    $this->open[$map] = $id;
     $teams = new TeamManager($id);
-    $game = new Game($id, $teams);
+    $game = new Game($id, $teams, $map, $maxplayers);
     $this->games[$id] = $game;
     return $game;
+  }
+  
+  public function addPlayerToGame(Player $player, string $gameId) {
+    $data = PlayerManager::get()->getPlayer($player->getName());
+    $game = $this->getGame($gameId);
+    $game->bumpPlayerCount();
+    $data->setPlaying(true, $gameId);
+    $level = Loader::get()->getLevelByName($game->getMap());
+    $player->teleport($level->getSafeSpawn());
+    $this->chooseTeam($game, $player);
+    if($game->getPlayerCount() === $game->getMaxPlayers()) {
+      $this->prepare($gameId);
+      unset($this->open[$gameId]);
+      $this->createGame($game->getMap());
+    }
+  }
+  
+  private function chooseTeam(Game $game, Player $player) {
+     //TODO: Implement a system to allow players to choose a team
   }
   
   public function endGame(int $id) {
@@ -48,5 +73,6 @@ class GameManager {
       }
     }
     unset($this->games[$id]);
+    //TODO: Reload the map
   }
 }
