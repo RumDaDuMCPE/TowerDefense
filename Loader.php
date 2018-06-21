@@ -5,7 +5,7 @@ namespace TowerDefense;
 use pocketmine\{Player, Server};
 use pocketmine\plugin\PluginBase;
 use pocketmine\event\Listener;
-
+use TowerDefense\api\Utils;
 use TowerDefense\Events\{
     PlayerEvents,
     EntityEvents
@@ -19,6 +19,7 @@ class Loader extends PluginBase implements Listener {
 
     public function onEnable() {
         self::$instance = $this;
+        Utils::enable();
         $this->registerEvents();
 
     }
@@ -36,24 +37,8 @@ class Loader extends PluginBase implements Listener {
         }
     }
 
-
-    public function findPlayerGame(string $player) : string {
-        // TODO
-    }
-
-
-
     public function sendPlayerToGame(string $player, int $coords) {
         // TODO
-    }
-
-    public function isInAnyGame(string $player) : bool {
-        // TODO
-    }
-
-
-    public function isInGame(string $player) : bool {
-        if (isInAnyGame($player)) return true;
     }
 
     public function getOpponents(string $player) : array {
@@ -82,5 +67,9 @@ class Loader extends PluginBase implements Listener {
         $messages = new api\game\Messages();
         $message = $messages->getMessage($msg, $player);
         return $message;
+    }
+    
+    public function onDisable() {
+        Utils::disable();
     }
 }
