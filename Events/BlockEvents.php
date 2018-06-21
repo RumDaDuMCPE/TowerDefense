@@ -6,6 +6,7 @@ use pocketmine\event\Listener;
 use pocketmine\event\block\{BlockPlaceEvent, BlockBreakEvent, SignChangeEvent};
 use TowerDefense\Loader;
 use TowerDefense\api\player\PlayerManager;
+use TowerDefense\api\game\GameManager;
 use pocketmine\utils\TextFormat as c;
 
 class BlockEvents implements Listener {
@@ -30,7 +31,8 @@ class BlockEvents implements Listener {
     if($player->hasPermission("TowerDefense.sign.create")) {
       if($lines[0] === "[TowerDefense]" && isset($lines[1])) {
         //TODO: Check if there is a valid map
-        $event->setLines(["[TowerDefense]", "TestMap", "", ""]);
+        $event->setLines(["[TowerDefense]", "TestMap", "2", ""]);
+        GameManager::get()->createGame("TestMap", 2);
         $player->sendMessage(Loader::PREFIX . "A join sign has been created for TestMap!"); //Change the hardcode once maps have been implemented!
       } else {
         $event->setLines([c::RED . "[TowerDefense]", "You must put a map name!", "", ""]);
