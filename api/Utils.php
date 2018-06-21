@@ -36,7 +36,15 @@ class Utils {
   
   public static function enable() {
     self::loadClasses();
+    self::isFolder(Loader::get()->getDataFolder());
+    self::isFolder(Loader::get()->getDataFolder() . "users");
     PlayerManager::get()->loadData();
+  }
+  
+  public static function isFolder(string $folder) {
+    if(!is_dir($folder)) {
+      mkdir($folder);
+    }
   }
   
   public static function disable() {
