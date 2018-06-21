@@ -30,7 +30,7 @@ class RBCPlayer {
   
   public function setPlaying(bool $playing, int $gameId) {
     $this->in_game = $playing;
-    $thiss->gameId = $gameId;
+    $this->gameId = $gameId;
   }
   
   public function getWins() {
