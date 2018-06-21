@@ -21,6 +21,7 @@ class DeathTask extends Task {
   
   public function onRun(int $currentTick) {
     if($this->time <= 0) {
+      //TODO: Teleport players back to there tower after death!
       $this->player->setGamemode(3);
       $this->player->getInventory()->clearAll();
       $this->player->getArmorInventory()->clearAll();
