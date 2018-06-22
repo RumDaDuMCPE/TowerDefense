@@ -16,17 +16,6 @@ class messages {
         foreach ($messages as $message) {
             TextFormat::colorize($message);
         }
-
-        switch ($msg) {
-            case "breach":
-                return $messages["breach"];
-                break;
-            case "extraction.successful":
-                return $messages["extraction.successful"];
-                break;
-            default:
-                return $messages["error"];
-                break;
-        }
+        return $messages[$msg];
     }
 }
