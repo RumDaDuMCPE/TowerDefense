@@ -7,8 +7,11 @@ use TowerDefense\api\game\GameManager;
 use TowerDefense\api\player\PlayerManager;
 use pocketmine\event\Listener;
 use pocketmine\event\player\{PlayerDeathEvent, PlayerInteractEvent, PlayerMoveEvent};
+use pocketmine\nbt\tag\ByteTag;
 
 class PlayerEvents implements Listener {
+  
+  private $seconds = 1;
 
   public function onPlayerInteract(PlayerInteractEvent $event) {
     $player = $event->getPlayer();
@@ -17,7 +20,9 @@ class PlayerEvents implements Listener {
     $data = PlayerManager::get()->getPlayer($player->getName());
     $tile = $block->getLevel()->getTile($block);
     if($block->getId() === 57) {
-      Loader::get()->getScheduler()->scheduleRepeatingTask(new Extraction(Loader::get(), $player), 5);
+      $tick = 20;
+      $time = $tick * $this->seconds;
+      Loader::get()->getScheduler()->scheduleRepeatingTask(new Extraction(Loader::get(), $player), $time);
     }
     if($tile) {
       if($tile instanceof Sign) {
