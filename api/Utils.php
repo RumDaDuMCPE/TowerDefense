@@ -6,6 +6,8 @@ use TowerDefense\Loader;
 use TowerDefense\api\game\GameManager;
 use TowerDefense\api\player\PlayerManager;
 
+use pocketmine\Player;
+
 class Utils {
 
   public const CHAT = 0;
@@ -16,8 +18,8 @@ class Utils {
   public const ADD = 1;
   public const TAKE = 2;
   
-  public static function broadcast(string $message, int $data, string $subtitle = "") {
-    foreach(Loader::get()->getServer()->getOnlinePlayers() as $players) {
+  public static function broadcast(string $message, Player $player, int $data, string $subtitle = "") {
+    if (count($player) > 1) foreach($player as $players) {
       if($data === self::CHAT) {
         $players->sendMessage($message);
       } elseif($data === self::TITLE) {
