@@ -30,7 +30,7 @@ class PlayerEvents implements Listener {
           //TODO: Check if the map is valid
           $event->setCancelled(true);
           $game = GameManager::get()->getGame(GameManager::get()->getIdByMap($tile->getLine(1)))
-          GameManager:;get()->addPlayerToGame($player, $tile->getLine(1));
+          GameManager::get()->addPlayerToGame($player, $tile->getLine(1));
         }
       }
     }
