@@ -59,6 +59,7 @@ class GameManager {
   
   private function chooseTeam(Game $game, Player $player) {
      //TODO: Implement a system to allow players to choose a team
+     // count team A members > team B members ? join team B : join team A
   }
   
   public function endGame(int $id) {
