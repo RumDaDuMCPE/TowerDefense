@@ -7,8 +7,8 @@ use TowerDefence\api\game\entities\Team;
 
 class Game {
 
-    private $id
-    private $teams = []
+    private $id;
+    private $teams = [];
     private $towers = [];
     private $map;
     
