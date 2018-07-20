@@ -2,7 +2,10 @@
 
 namespace TowerDefence\api\game;
 
-class Game 
+use TowerDefence\api\game\entities\GameMap;
+use TowerDefence\api\game\entities\Team;
+
+class Game {
 
     private $id
     private $teams = []
@@ -30,9 +33,9 @@ class Game
     
     public function addTeam(string $name, $maxMembers, int $towerType): Team {
         if(!isset($this->teams[$name])) {
-            $team = new Team($name, $maxMembers, $towerType);
+            $team = new Team($name, $maxMembers, $towerType, $this);
             $this->teams[$name] = $team;
-            $team->build();
+            $team->getTower()->construct();
             return $team;
         }
         return null;
@@ -45,4 +48,11 @@ class Game
         }
         return false;
     }
+                 
+    public function getTowers(): array {
+        return $this->towers;
+    }
+
+    //TODO
+    public function process(): void {}
 }
