@@ -9,7 +9,7 @@ use TowerDefense\api\Utils;
 use TowerDefense\Events\{
     PlayerEvents,
     EntityEvents
-}
+};
 
 class Loader extends PluginBase implements Listener {
 
@@ -43,15 +43,6 @@ class Loader extends PluginBase implements Listener {
 
     public function getOpponents(string $player) : array {
         // TODO
-    }
-
-    public function getAreas() {
-        $areas = new Areas($this);
-        $this->return($areas);
-    }
-
-    public function getEnemyBlock(string $player) {
-
     }
 
     public function isInTower(Player $player) : bool { // Checks if player is in in ANY Tone of the towers.
