@@ -18,18 +18,22 @@ class Utils {
   public const ADD = 1;
   public const TAKE = 2;
   
-  public static function broadcast(string $message, Player $player, int $data, string $subtitle = "") {
-    if (count($player) > 1) foreach($player as $players) {
-      if($data === self::CHAT) {
-        $players->sendMessage($message);
-      } elseif($data === self::TITLE) {
-        $players->addTitle($message, $subtitle, 20, 20, 20);
-      } elseif($data === self::POP) {
-        $players->sendPopup($message);
-      } else {
-        throw new \InvalidStateException("Invalid data entered!");
-      }
+  public static function broadcast(string $message, Player ...$player, int $data, string $subtitle = "") {
+    if (count($player) > 1)) {
+      array_filter($player, function(Player $player) use ($message, $data, $subtitle) {
+        if($data === self::CHAT) {
+          $player->sendMessage($message);
+        } elseif($data === self::TITLE) {
+          $player->addTitle($message, $subtitle, 20, 20, 20);
+        } elseif($data === self::POP) {
+          $player->sendPopup($message);
+        } else {
+          throw new \InvalidStateException("Invalid data entered!");
+        }
+      });
+      return true;
     }
+    return false;
   }
   
   private static function loadClasses() {
