@@ -1,56 +1,58 @@
 <?php
 
-namespace TowerDefense\api\game;
+namespace TowerDefence\api\game;
 
-use TowerDefense\api\game\managers\TeamManager;
+use TowerDefence\api\game\entities\GameMap;
+use TowerDefence\api\game\entities\Team;
 
 class Game {
 
-  private $id;
-  private $teammanager;
-  private $time;
-  private $map;
-  private $player_count = 0;
-  private $max_players;
-  
-  public function __construct(int $id, TeamManager $teams, string $map, int $max_players) {
-    $this->id = $id;
-    $this->teammanager = $teams;
-    $this->time = 0;
-    $this->map = $map;
-    $this->max_players = $max_players;
-  }
-  
-  public function getId() {
-    return $this->id;
-  }
-  
-  public function getTeamManager() {
-    return $this->teammanager;
-  }
-  
-  public function getMap() {
-    return $this->map;
-  }
-  
-  public function getMaxPlayers() {
-    return $this->max_players;
-  }
-  
-  public function getPlayerCount() {
-    return $this->player_count;
-  }
-  
-  public function bumpPlayerCount() {
-    $this->player_count++;
-  }
-  
-  public function getTime() {
-    return $this->time;
-  }
-  
-  public function updateTime() {
-    $this->time++;
-    //TODO: Rewrite this to update other parts of the game
-  }
+    private $id;
+    private $teams = [];
+    private $towers = [];
+    private $map;
+    
+    public function __construct($id, $teams, $towers, GameMap $map) {
+        $this->id = $id;
+        $this->teams = $teams;
+        $this->towers = $towers;
+        $this->map = $map;
+    }
+    
+    public function getId(): string {
+        return $this->id;
+    }
+    
+    public function getMap(): GameMap {
+        return $this->map;
+    }
+    
+    public function getTeams(): string {
+        return $this->teams;
+    }
+    
+    public function addTeam(string $name, $maxMembers, int $towerType): Team {
+        if(!isset($this->teams[$name])) {
+            $team = new Team($name, $maxMembers, $towerType, $this);
+            $this->teams[$name] = $team;
+            $team->getTower()->construct();
+            return $team;
+        }
+        return null;
+    }
+    
+    public function removeTeam($name): bool {
+        if(isset[$this->teams[$name]) {
+            unset($this->teams[$name]);
+            return true;
+        }
+        return false;
+    }
+                 
+    public function getTowers(): array {
+        return $this->towers;
+    }
+
+    //TODO
+    public function process(): void {}
 }
