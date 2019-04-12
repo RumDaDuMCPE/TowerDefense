@@ -5,7 +5,8 @@ namespace TowerDefense;
 use pocketmine\{Player, Server};
 use pocketmine\plugin\PluginBase;
 use pocketmine\event\Listener;
-use TowerDefense\api\Utils;
+use TowerDefense\Utils;
+use TowerDefense\system\UpdateHandler;
 use TowerDefense\Events\{
     PlayerEvents,
     EntityEvents
@@ -15,20 +16,25 @@ class Loader extends PluginBase implements Listener {
 
     /** @var Loader */
     private static $sInstance;
+    /** @var UpdateHandler */
+    private static $sUpdateHandler;
 
     public $tasks = [];
 
     public function onEnable() {
-        Utils::enable();
         $this->registerEvents();
-
     }
 
-    public static function get() {
+    public static function get(): Loader {
         if(is_null(self::$sInstance)) { self::$sInstance = new self(); }
         return self::$sInstance;
     }
 
+    public static function getUpdateHandler(): UpdateHandler {
+        if(is_null(self::$sUpdateHandler)) { self::$sUpdateHandler = new UpdateHandler(self::get()->getServer()->getLoader(), self::get()->getServer()->getLogger()); }
+        return self::$sUpdateHandler;
+    }
+    
     public function registerEvents() {
         foreach ([
                      new PlayerEvents(),
@@ -36,19 +42,6 @@ class Loader extends PluginBase implements Listener {
                  ] as $event) {
             $this->getServer()->getPluginManager()->registerEvents($event);
         }
-    }
-
-    public function sendPlayerToGame(string $player, int $coords) {
-        // TODO
-    }
-
-    public function getOpponents(string $player) : array {
-        // TODO
-    }
-
-    public function getAreas() {
-        $areas = new Areas($this);
-        $this->return($areas);
     }
 
     public function getEnemyBlock(string $player) {
@@ -71,6 +64,6 @@ class Loader extends PluginBase implements Listener {
     }
     
     public function onDisable() {
-        Utils::disable();
+        
     }
 }
