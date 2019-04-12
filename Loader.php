@@ -13,19 +13,20 @@ use TowerDefense\Events\{
 
 class Loader extends PluginBase implements Listener {
 
-    private static $instance;
+    /** @var Loader */
+    private static $sInstance;
 
     public $tasks = [];
 
     public function onEnable() {
-        self::$instance = $this;
         Utils::enable();
         $this->registerEvents();
 
     }
 
     public static function get() {
-        return self::$instance;
+        if(is_null(self::$sInstance)) { self::$sInstance = new self(); }
+        return self::$sInstance;
     }
 
     public function registerEvents() {
