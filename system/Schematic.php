@@ -53,7 +53,7 @@ class Schematic {
 	 *
 	 * @param string $file the Schematic output file name
 	 */
-	public function save(string $file) : void{
+	public function save(string $file) : string{
 		$nbt = new CompoundTag("Schematic", [
 			new ByteArrayTag("Blocks", $this->blocks),
 			new ByteArrayTag("Data", $this->data),
@@ -62,7 +62,7 @@ class Schematic {
 			new ShortTag("Height", $this->height),
 			new StringTag("Materials", self::MATERIALS_POCKET)
 		]);
-		file_put_contents($file, (new BigEndianNbtSerializer())->writeCompressed($nbt));
+		return (new BigEndianNbtSerializer())->writeCompressed($nbt);
 	}
 	/**
 	 * parse parses a schematic from the file passed.
@@ -70,7 +70,7 @@ class Schematic {
 	 * @param string $file
 	 */
 	public function parse(string $file) : void{
-		$nbt = (new BigEndianNbtSerializer())->readCompressed(file_get_contents($file));
+		$nbt = (new BigEndianNbtSerializer())->readCompressed($file);
 		$this->materials = $nbt->getString("Materials");
 		$this->height = $nbt->getShort("Height");
 		$this->width = $nbt->getShort("Width");
