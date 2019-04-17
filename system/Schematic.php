@@ -53,7 +53,7 @@ class Schematic {
 	 *
 	 * @param string $file the Schematic output file name
 	 */
-	public function save(string $file) : string{
+	public function save() : string{
 		$nbt = new CompoundTag("Schematic", [
 			new ByteArrayTag("Blocks", $this->blocks),
 			new ByteArrayTag("Data", $this->data),
